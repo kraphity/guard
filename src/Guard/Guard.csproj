@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <AssemblyName>Kraphity.Guard</AssemblyName>
+    <RootNamespace>Kraphity.Guard</RootNamespace>
+    <Authors>Philippe Kräuchi</Authors>
+    <Company>Kraphity GmbH</Company>
+    <Copyright>Philippe Kräuchi (Kraphity GmbH)</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../Guard.snk</AssemblyOriginatorKeyFile>
+    <RepositoryUrl>https://github.com/kraphity/guard</RepositoryUrl>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
