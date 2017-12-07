@@ -3,15 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
     <AssemblyName>Kraphity.Guard</AssemblyName>
-    <RootNamespace>Kraphity.Guard</RootNamespace>
-    <Authors>Philippe Kräuchi</Authors>
-    <Company>Kraphity GmbH</Company>
-    <Copyright>Philippe Kräuchi (Kraphity GmbH)</Copyright>
+    <RootNamespace>Kraphity.Guard</RootNamespace>    
     <PackageProjectUrl></PackageProjectUrl>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../Guard.snk</AssemblyOriginatorKeyFile>
-    <RepositoryUrl>https://github.com/kraphity/guard</RepositoryUrl>
-    <DebugType>Full</DebugType>
+    <AssemblyOriginatorKeyFile>../../Guard.snk</AssemblyOriginatorKeyFile>        
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,15 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guard", "src\Guard\Guard.csproj", "{E5DFC901-1B6C-40D5-9E19-A27CB57E126E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guard", "src\Guard\Guard.csproj", "{E5DFC901-1B6C-40D5-9E19-A27CB57E126E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5C2853F-A647-4F9B-BC7C-3B7B3B989381}"
 	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guard.Tests", "src\Guard.Tests\Guard.Tests.csproj", "{CC511FFE-9253-4B26-B857-4F532EFBA13E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guard.Tests", "src\Guard.Tests\Guard.Tests.csproj", "{CC511FFE-9253-4B26-B857-4F532EFBA13E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F2F7EF52-0851-4FB3-B13E-992DA9B50FFC}"
 EndProject

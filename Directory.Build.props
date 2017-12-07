@@ -1,0 +1,31 @@
+<Project>
+  <PropertyGroup>
+    <BuildNumber Condition="'$(BuildNumber)' == ''">0</BuildNumber>
+    
+    <VersionPrefix>1.0.0</VersionPrefix>
+    
+    <VersionSuffix>alpha</VersionSuffix>    
+    <VersionSuffix Condition="'$(VersionSuffix)' != ''">$(VersionSuffix)$(BuildNumber)</VersionSuffix>
+    
+    <FileVersion>$(VersionPrefix).$(BuildNumber)</FileVersion>
+    
+    <PackageVersion Condition="'$(VersionSuffix)' == 'rtm'">$(VersionPrefix)</PackageVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Authors>Philippe Kräuchi</Authors>
+    <Company>Kraphity GmbH</Company>
+    <Copyright>Philippe Kräuchi (Kraphity GmbH)</Copyright>
+    <RepositoryUrl>https://github.com/kraphity/guard</RepositoryUrl>
+    <Product>Kraphity.Guard</Product>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Guard.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  
+    <PropertyGroup>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+</Project>
