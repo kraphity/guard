@@ -14,9 +14,14 @@ var buildNumberPattern = Argument("buildNumberPattern", @"^.*-(\d+)$");
 var buildNumber = Regex.Match(buildName, buildNumberPattern).Groups[1].Value;
 versionSuffix = $"{versionSuffix}{buildNumber}";
 
-var binOutputDir = System.IO.Path.Combine(outputDir, "bin");
-var testResultsDir = DirectoryPath.FromString(System.IO.Path.Combine(outputDir, "testresults"));
-var packOutputDir = System.IO.Path.Combine(outputDir, "pkgs");
+var outputDirPath = DirectoryPath.FromString(outputDir);
+
+var dropDir = outputDirPath.Combine("drop");
+
+var binOutputDir = outputDirPath.Combine("bin");
+var testResultsDir = outputDirPath.Combine("testresults");
+var publishOutputDir = outputDirPath.Combine("publish");
+var packOutputDir = dropDir.Combine("pkgs");
 
 var verbosity = DotNetCoreVerbosity.Normal;
 
@@ -61,13 +66,30 @@ var packSettings = new DotNetCorePackSettings
 	MSBuildSettings = msBuildSettings
 };
 
+var publishSettings = new DotNetCorePublishSettings
+{
+	Verbosity = verbosity,
+	Configuration = configuration,
+	OutputDirectory = publishOutputDir,
+	VersionSuffix = versionSuffix,
+	MSBuildSettings = msBuildSettings
+};
+
 Task("Clean")
 	.Does(
 		() =>
 		{
+			Information($"Delete directory '{outputDir}'");
+
 			if(DirectoryExists(outputDir))
 			{
-				DeleteDirectory(outputDir, recursive:true);
+				DeleteDirectory(
+					outputDir, 
+					new DeleteDirectorySettings
+					{
+						Recursive = true,
+						Force = true
+					});
 			}
 		});
 
@@ -105,16 +127,40 @@ Task("Pack")
 			DotNetCorePack(file.FullPath, packSettings);
 		});
 
+Task("Publish")
+	.DoesForEach(
+		packProjectFiles,
+		(file) =>
+		{
+			DotNetCorePublish(file.FullPath, publishSettings);
+		});
+
 Task("Compress")
 	.Does(
 		() =>
 		{
-			Zip(outputDir, System.IO.Path.Combine(outputDir, "artifacts.zip"));
+			CreateDirectory(dropDir);
+			
+			new List<DirectoryPath> 
+			{ 
+				testResultsDir, 
+				publishOutputDir
+			}.ForEach(
+				dir =>
+				{
+					if(DirectoryExists(dir))
+					{
+						Information($"Compress directory '{dir}'");
+
+						Zip(dir, dropDir.GetFilePath(dir.GetDirectoryName()).AppendExtension("zip"));
+					}
+				});
 		});
 
 Task("Default")
 	.IsDependentOn("Build")
-	.IsDependentOn("Test")
+	.IsDependentOn("Test")	
+	.IsDependentOn("Publish")
 	.IsDependentOn("Pack")
 	.IsDependentOn("Compress");
 
