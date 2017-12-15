@@ -7,7 +7,7 @@ var configuration = Argument("configuration", "Release");
 var projectsPattern = Argument("projectsPattern", "**/*.csproj");
 var testsPattern = Argument("testsPattern", "**/*Tests/*.csproj");
 var versionSuffix = Argument("versionSuffix", "local");
-var isReleaseBuild = Argument("isReleaseBuild", "false");
+var isReleaseBuild = Argument<bool>("isReleaseBuild", false);
 var buildName = Argument("buildName", "local-0");
 var buildNumberPattern = Argument("buildNumberPattern", @"^.*-(\d+)$");
 
@@ -26,7 +26,7 @@ var packProjectFiles = projectFiles.Where(p => testProjectFiles.All(t => t.FullP
 
 var msBuildSettings = new DotNetCoreMSBuildSettings()
 	.WithProperty("BuildNumber", buildNumber)
-	.WithProperty("IsReleaseBuild", isReleaseBuild); 
+	.WithProperty("IsReleaseBuild", isReleaseBuild.ToString().ToLowerInvariant()); 
 
 var restoreSettings = new DotNetCoreRestoreSettings
 {
