@@ -2,13 +2,13 @@ using static Cake.Common.Tools.DotNetCore.MSBuild.DotNetCoreMSBuildSettingsExten
 using System.Text.RegularExpressions;
 
 var target = Argument("target", "Default");
-var outputDir = Argument("outputDir", "./artifacts/");
+var outputDir = Argument("outputDir", EnvironmenVariable("BUILD_ARTIFACTSTAGINGDIRECTORY") ?? "./artifacts/");
 var configuration = Argument("configuration", "Release");
 var projectsPattern = Argument("projectsPattern", "**/*.csproj");
 var testsPattern = Argument("testsPattern", "**/*Tests/*.csproj");
-var versionSuffix = Argument("versionSuffix", "local");
+var versionSuffix = Argument("versionSuffix", EnvironmenVariable("BUILD_SOURCEBRANCHNAME") ?? "local");
 var isReleaseBuild = Argument<bool>("isReleaseBuild", false);
-var buildName = Argument("buildName", "local-0");
+var buildName = Argument("buildName", EnvironmenVariable("BUILD_BUILDNUMBER") ?? "local-0");
 var buildNumberPattern = Argument("buildNumberPattern", @"^.*-(\d+)$");
 
 var buildNumber = Regex.Match(buildName, buildNumberPattern).Groups[1].Value;
