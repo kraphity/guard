@@ -9,22 +9,29 @@ namespace Kraphity.Guard.Tests
         public void NotNull()
         {
             string arg = "test";
-            Check.NotNull(arg, () => arg);
+            Check.NotNull(arg, nameof(arg));
         }
 
         [Fact]
         public void NotNull_NullValue_Throws()
         {
             string arg = null;
+            Assert.Throws<ArgumentNullException>(nameof(arg), () => Check.NotNull(arg, nameof(arg)));
+        }
+
+        [Fact]
+        public void NotNull_NullValueParamExpression_Throws()
+        {
+            string arg = null;
             Assert.Throws<ArgumentNullException>(nameof(arg), () => Check.NotNull(arg, () => arg));
         }
-        
+
         [Fact]
         public void If()
         {
-            Check.If(true, () => new ArgumentException());
+            Check.If(true, () => new ArgumentException("huu"));
         }
-        
+
         [Fact]
         public void If_InvalidCondition_Throws()
         {

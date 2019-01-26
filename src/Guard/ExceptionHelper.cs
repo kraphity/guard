@@ -1,31 +1,24 @@
 ﻿using System;
-using System.Linq.Expressions;
 
 namespace Kraphity.Guard
 {
     internal static class ExceptionHelper
     {
-        internal static Exception BuildArgumentInvalidException(LambdaExpression paramName, string message)
+        internal static Exception BuildArgumentEmptyException(string paramName, string message)
         {
-            return new ArgumentException(message ?? Resources.ArgumentInvalidMessage, paramName.ToMemberPath());
+            return new ArgumentException(message ?? Resources.ArgumentEmptyMessage, paramName);
         }
 
-        internal static Exception BuildArgumentEmptyException(LambdaExpression paramName, string message)
+        internal static Exception BuildArgumentNullException(string paramName, string message)
         {
-            return new ArgumentException(message ?? Resources.ArgumentEmptyMessage, paramName.ToMemberPath());
-        }
-
-        internal static Exception BuildArgumentNullException(LambdaExpression paramName, string message)
-        {
-            var pn = paramName.ToMemberPath();
             return message == null ?
-                new ArgumentNullException(pn) :
-                new ArgumentNullException(pn, message);
+                new ArgumentNullException(paramName) :
+                new ArgumentNullException(paramName, message);
         }
 
-        internal static Exception BuildArgumentOutOfRangeException(LambdaExpression paramName, string message, object value)
+        internal static Exception BuildArgumentOutOfRangeException(string paramName, string message, object value)
         {
-            return new ArgumentOutOfRangeException(paramName.ToMemberPath(), value, message ?? Resources.ArgumentOutOfRangeMessage);
+            return new ArgumentOutOfRangeException(paramName, value, message ?? Resources.ArgumentOutOfRangeMessage);
         }
     }
 }

@@ -18,9 +18,14 @@ namespace Kraphity.Guard
             }
         }
 
-        public static void NotNull<T>(T value, Expression<Func<T>> paramName, string message = null) where T : class
+        public static void NotNull<T>(T value, string paramName, string message = null) where T : class
         {
             If(value != null, () => ExceptionHelper.BuildArgumentNullException(paramName, message));
-        }               
+        }
+
+        public static void NotNull<T>(T value, Expression<Func<T>> paramName, string message = null) where T : class
+        {
+            NotNull(value, paramName.ToMemberPath(), message);
+        }
     }
 }
