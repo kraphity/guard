@@ -7,17 +7,17 @@ The package is available via [NuGet](https://www.nuget.org/packages/Kraphity.Gua
 
 ### Usage
 ```
-Check.NotNull(myString, () => myString);
+Check.NotNull(myString, nameof(myString));
 
-Check.NotEmpty(myString, () => myString);
-Check.NotEmpty(myList, () => myList);
-Check.NotEmpty(myGuid, () => myGuid);
+Check.NotEmpty(myString, nameof(myString));
+Check.NotEmpty(myList, nameof(myList));
+Check.NotEmpty(myGuid, nameof(myGuid));
 
-Check.NotWhitespace(myString, () => myString);
-Check.NotNullOrEmpty(myString, () => myString);
-Check.NotNullOrWhitespace(myString, () => myString);
+Check.NotWhitespace(myString, nameof(myString));
+Check.NotNullOrEmpty(myString, nameof(myString));
+Check.NotNullOrWhitespace(myString, nameof(myString));
 
-Check.InRange(myInt > 0, () => myInt, myInt);
+Check.InRange(myInt > 0, nameof(myInt), myInt);
 
 Check.If(myInt == 3, () => new ArgumentException());
 ```
