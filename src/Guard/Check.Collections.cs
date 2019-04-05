@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace Kraphity.Guard
@@ -19,7 +18,7 @@ namespace Kraphity.Guard
         {
             NotNull(value, paramName, message);
 
-            If(Enumerable.Any(value), () => ExceptionHelper.BuildArgumentEmptyException(paramName, message));
+            If(value.Any(), () => ExceptionHelper.BuildArgumentEmptyException(paramName, message));
         }
 
         public static void NotEmpty(IEnumerable value, Expression<Func<IEnumerable>> paramName, string message = null)
