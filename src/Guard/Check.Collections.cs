@@ -12,14 +12,14 @@ namespace Kraphity.Guard
         {
             NotNull(value, paramName, message);
 
-            If(value.Count() > 0, () => ExceptionHelper.BuildArgumentEmptyException(paramName, message));
+            If(value.Any(), () => ExceptionHelper.BuildArgumentEmptyException(paramName, message));
         }
 
         public static void NotEmpty<TCollection, TElement>(TCollection value, string paramName, string message = null) where TCollection : class, IEnumerable<TElement>
         {
             NotNull(value, paramName, message);
 
-            If(value.Any(), () => ExceptionHelper.BuildArgumentEmptyException(paramName, message));
+            If(Enumerable.Any(value), () => ExceptionHelper.BuildArgumentEmptyException(paramName, message));
         }
 
         public static void NotEmpty(IEnumerable value, Expression<Func<IEnumerable>> paramName, string message = null)
